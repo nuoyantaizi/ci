@@ -18,6 +18,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->initialize();
 
 		$this->event = load_class('Event', 'core');
+		$this->document = load_class('Document', 'core');
 	}
 
 	public function _remap($method, $args=array())
