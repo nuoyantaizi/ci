@@ -7,18 +7,14 @@ class MY_Controller extends CI_Controller {
 	{
 		if(! is_object(get_instance())) {
 			parent::__construct();
+			$this->event = & load_class('Event', 'core');
+			$this->document = & load_class('Document', 'core');
+		} else {
+			foreach(get_object_vars(get_instance()) as $key=>$var)
+			{
+				$this->$key = $var;
+			}
 		}
-		
-		foreach (is_loaded() as $var => $class)
-		{
-			$this->$var =& load_class($class);
-		}
-
-		$this->load =& load_class('Loader', 'core');
-		$this->load->initialize();
-
-		$this->event = load_class('Event', 'core');
-		$this->document = load_class('Document', 'core');
 	}
 
 	public function _remap($method, $args=array())
