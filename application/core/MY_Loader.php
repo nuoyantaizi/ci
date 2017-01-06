@@ -31,7 +31,7 @@ class MY_Loader extends CI_Loader {
 		$result = $CI->event->trigger('view/'.$view.'/after', array(&$vars, &$return));
 		if($return) $output .= $result;
 
-		return $output;
+		if($return) return $output;
 	}
 
 	public function controller($controller, $name)
