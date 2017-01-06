@@ -1,6 +1,9 @@
 <?php
 class MY_Event {
-	private $events = array();
+	private $events = array(
+		'controller/admin/(welcome|account)/*/before'=>'controller/admin/login/index',
+		'view/admin/index/after'=>'controller/admin/welcome/export',
+	);
 
 	public function __get($key)
 	{
@@ -21,7 +24,7 @@ class MY_Event {
 	{
 		foreach($this->events as $event_route=>$action)
 		{
-			if(preg_match('|'.str_replace('*', '.*', $event_route).'|', $route)) {
+			if(preg_match('@'.str_replace('*', '.*', $event_route).'@', $route)) {
 
 				$action_split = explode('/', $action);
 				$action_type = array_shift($action_split);
